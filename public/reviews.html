@@ -3,57 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Customer reviews for Clean Web Studio. See what barbershop owners are saying.">
-  <title>Reviews | Clean Web Studio</title>
+  <meta name="description" content="Customer reviews for Clean Web Launchpad">
+  <title>Reviews - Clean Web Launchpad</title>
   <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/favicon.ico">
 </head>
 <body>
   <header>
     <nav>
-      <ul>
+      <button id="nav-toggle">☰</button>
+      <ul id="nav-menu" class="hidden">
         <li><a href="/index.html">Home</a></li>
         <li><a href="/services.html">Services</a></li>
-        <li><a href="/pricing.html">Pricing</a></li>
-        <li><a href="/about.html">About</a></li>
         <li><a href="/reviews.html">Reviews</a></li>
         <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/admin.html">Admin</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section class="reviews-section">
+    <section>
       <h1>Customer Reviews</h1>
-      <div id="reviews-container">
-        Loading reviews...
+      <div id="reviews-list">
+        <p>Loading reviews...</p>
       </div>
-    </section>
-
-    <section class="leave-review">
-      <h2>Leave a Review</h2>
-      <form id="review-form">
-        <input type="text" id="review-name" placeholder="Your Name *" required>
-        <select id="review-rating" required>
-          <option value="">Select a rating</option>
-          <option value="5">★★★★★ (5 stars)</option>
-          <option value="4">★★★★☆ (4 stars)</option>
-          <option value="3">★★★☆☆ (3 stars)</option>
-          <option value="2">★★☆☆☆ (2 stars)</option>
-          <option value="1">★☆☆☆☆ (1 star)</option>
-        </select>
-        <textarea id="review-text" placeholder="Your Review *" required></textarea>
-        <button type="submit">Submit Review</button>
-        <div id="review-message" class="form-message"></div>
-      </form>
     </section>
   </main>
 
   <footer>
-    <p>Clean Web Studio – (760) 819-9877 – 50% deposit required upfront ($125)</p>
-    <p>© 2024 Clean Web Studio. All rights reserved.</p>
+    <p>&copy; 2026 Clean Web Launchpad</p>
   </footer>
 
-  <script src="/api-config.js"></script>
-  <script src="/reviews.js"></script>
+  <script type="module">
+    async function loadReviews() {
+      const container = document.getElementById('reviews-list');
+      try {
+        const res = await fetch('/api/reviews');
+        const data = await res.json();
+        container.innerHTML = data.length
+          ? data.map(r => `<div class="review"><strong>${r.name}</strong>: ${r.message}</div>`).join('')
+          : '<p>No reviews yet.</p>';
+      } catch {
+        container.innerHTML = '<p>Failed to load reviews.</p>';
+      }
+    }
+    loadReviews();
+  </script>
 </body>
 </html>
