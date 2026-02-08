@@ -84,3 +84,35 @@ function escapeHtml(text) {
   div.textContent = text;
   return div.innerHTML;
 }
+// pricing.js
+// Example: If you want to highlight pricing cards dynamically
+document.addEventListener('DOMContentLoaded', () => {
+  const pricingCards = document.querySelectorAll('.pricing-card');
+
+  pricingCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'scale(1.05)';
+      card.style.transition = 'transform 0.3s';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'scale(1)';
+    });
+  });
+});
+// pricing.js
+// Example: If you want to highlight pricing cards dynamically
+document.addEventListener('DOMContentLoaded', () => {
+  const pricingCards = document.querySelectorAll('.pricing-card');
+
+  pricingCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'scale(1.05)';
+      card.style.transition = 'transform 0.3s';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'scale(1)';
+    });
+  });
+});
+
+
