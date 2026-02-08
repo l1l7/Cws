@@ -3,51 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact Clean Web Launchpad">
-  <title>Contact Us - Clean Web Launchpad</title>
+  <title>Reviews - Clean Web Launchpad</title>
+  <meta name="description" content="See what our customers are saying.">
   <link rel="stylesheet" href="/style.css">
-  <link rel="icon" href="/favicon.ico">
 </head>
 <body>
   <header>
+    <h1>Customer Reviews</h1>
     <nav>
-      <button id="nav-toggle">☰</button>
-      <ul id="nav-menu" class="hidden">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/reviews.html">Reviews</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-        <li><a href="/admin.html">Admin</a></li>
-      </ul>
+      <a href="/index.html">Home</a>
+      <a href="/services.html">Services</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/reviews.html">Reviews</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/admin.html">Admin</a>
     </nav>
   </header>
 
   <main>
-    <section>
-      <h1>Contact Us</h1>
-      <form id="contact-form">
-        <label for="contact-name">Name*</label>
-        <input type="text" id="contact-name" name="name" required>
-
-        <label for="contact-email">Email*</label>
-        <input type="email" id="contact-email" name="email" required>
-
-        <label for="contact-phone">Phone</label>
-        <input type="tel" id="contact-phone" name="phone">
-
-        <label for="contact-message-text">Message</label>
-        <textarea id="contact-message-text" name="message"></textarea>
-
-        <button type="submit">Submit</button>
-        <p id="contact-message" class="form-message" style="display:none;"></p>
-      </form>
-    </section>
+    <div id="reviews-container">
+      <p>Loading reviews...</p>
+    </div>
   </main>
 
   <footer>
     <p>&copy; 2026 Clean Web Launchpad</p>
   </footer>
 
+  <script src="/api-config.js" type="module"></script>
+  <script src="/reviews.js" type="module"></script>
   <script src="/script.js" type="module"></script>
 </body>
 </html>
