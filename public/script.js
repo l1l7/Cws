@@ -1,31 +1,86 @@
-// Example main JS for contact forms or other general features
+// ----------------------------
+// Global Navigation
+// ----------------------------
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
 
-async function submitLead(event) {
-  event.preventDefault();
-  const form = event.target;
-  const data = {
-    name: form.name.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    message: form.message.value,
-  };
-
-  const res = await fetch(`${API_BASE}/lead-submit`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('hidden');
   });
-
-  const json = await res.json();
-  if (json.success) {
-    alert('Thank you! Your submission has been received.');
-    form.reset();
-  } else {
-    alert('Error: ' + (json.error || 'Something went wrong'));
-  }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const leadForm = document.querySelector('#lead-form');
-  if (leadForm) leadForm.addEventListener('submit', submitLead);
-});
+// ----------------------------
+// Contact Form Submission
+// ----------------------------
+const contactForm = document.getElementById('contact-form');
+const contactMessageEl = document.getElementById('contact-message');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    const formData = {
+      name: document.getElementById('contact-name').value.trim(),
+      email: document.getElementById('contact-email').value.trim(),
+      phone: document.getElementById('contact-phone').value.trim(),
+      message: document.getElementById('contact-message-text').value.trim()
+    };
+
+    // Validate required fields
+    if (!formData.name || !formData.email) {
+      showMessage(contactMessageEl, 'Name and Email are required.', 'error');
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/lead-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        showMessage(contactMessageEl, 'Thank you! We will contact you soon.', 'success');
+        contactForm.reset();
+      } else {
+        showMessage(contactMessageEl, data.error || 'Failed to submit. Try again.', 'error');
+      }
+    } catch (err) {
+      console.error('Error submitting contact form:', err);
+      showMessage(contactMessageEl, 'Unable to submit. Try again later.', 'error');
+    }
+
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  });
+}
+
+// ----------------------------
+// Helper Functions
+// ----------------------------
+function showMessage(el, message, type) {
+  if (!el) return;
+  el.textContent = message;
+  el.className = 'form-message ' + type;
+  el.style.display = 'block';
+
+  setTimeout(() => {
+    el.style.display = 'none';
+  }, 5000);
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
