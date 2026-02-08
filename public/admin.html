@@ -3,53 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Admin dashboard for Clean Web Studio. Manage leads and customer reviews.">
-  <title>Admin Dashboard | Clean Web Studio</title>
+  <meta name="description" content="Admin panel for Clean Web Launchpad">
+  <title>Admin - Clean Web Launchpad</title>
   <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/favicon.ico">
 </head>
 <body>
   <header>
     <nav>
-      <ul>
+      <button id="nav-toggle">☰</button>
+      <ul id="nav-menu" class="hidden">
         <li><a href="/index.html">Home</a></li>
         <li><a href="/services.html">Services</a></li>
-        <li><a href="/pricing.html">Pricing</a></li>
-        <li><a href="/about.html">About</a></li>
         <li><a href="/reviews.html">Reviews</a></li>
         <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/admin.html">Admin</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section class="admin-login-section">
-      <h1>Admin Login</h1>
+    <section>
+      <h1>Admin Panel</h1>
+      <p>Login or manage content here.</p>
       <form id="admin-login-form">
-        <input type="password" id="admin-password" placeholder="Password *" required>
+        <label for="admin-username">Username</label>
+        <input type="text" id="admin-username" name="username" required>
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password" name="password" required>
         <button type="submit">Login</button>
-        <div id="admin-login-message" class="form-message"></div>
+        <p id="admin-message" class="form-message" style="display:none;"></p>
       </form>
-    </section>
-
-    <section class="admin-dashboard" style="display:none;">
-      <h2>Leads</h2>
-      <button id="refresh-leads">Refresh</button>
-      <div id="leads-container">Loading leads...</div>
-
-      <h2>Pending Reviews</h2>
-      <button id="refresh-reviews">Refresh</button>
-      <div id="pending-reviews-container">Loading reviews...</div>
-
-      <button id="logout-btn">Logout</button>
     </section>
   </main>
 
   <footer>
-    <p>Clean Web Studio – (760) 819-9877 – 50% deposit required upfront ($125)</p>
-    <p>© 2024 Clean Web Studio. All rights reserved.</p>
+    <p>&copy; 2026 Clean Web Launchpad</p>
   </footer>
 
-  <script src="/api-config.js"></script>
-  <script src="/admin.js"></script>
+  <script src="/script.js" type="module"></script>
 </body>
 </html>
