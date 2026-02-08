@@ -3,37 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Admin panel for Clean Web Launchpad">
   <title>Admin - Clean Web Launchpad</title>
+  <meta name="description" content="Admin dashboard for Clean Web Launchpad.">
   <link rel="stylesheet" href="/style.css">
-  <link rel="icon" href="/favicon.ico">
 </head>
 <body>
   <header>
+    <h1>Admin Panel</h1>
     <nav>
-      <button id="nav-toggle">☰</button>
-      <ul id="nav-menu" class="hidden">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/reviews.html">Reviews</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-        <li><a href="/admin.html">Admin</a></li>
-      </ul>
+      <a href="/index.html">Home</a>
+      <a href="/services.html">Services</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/reviews.html">Reviews</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/admin.html">Admin</a>
     </nav>
   </header>
 
   <main>
+    <form id="admin-login-form">
+      <label for="password">Password</label>
+      <input type="password" id="password" required>
+      <button type="submit">Login</button>
+    </form>
+
     <section>
-      <h1>Admin Panel</h1>
-      <p>Login or manage content here.</p>
-      <form id="admin-login-form">
-        <label for="admin-username">Username</label>
-        <input type="text" id="admin-username" name="username" required>
-        <label for="admin-password">Password</label>
-        <input type="password" id="admin-password" name="password" required>
-        <button type="submit">Login</button>
-        <p id="admin-message" class="form-message" style="display:none;"></p>
-      </form>
+      <h2>Leads</h2>
+      <div id="leads-container"></div>
+    </section>
+
+    <section>
+      <h2>Reviews</h2>
+      <div id="admin-reviews-container"></div>
     </section>
   </main>
 
@@ -41,6 +42,8 @@
     <p>&copy; 2026 Clean Web Launchpad</p>
   </footer>
 
+  <script src="/api-config.js" type="module"></script>
+  <script src="/admin.js" type="module"></script>
   <script src="/script.js" type="module"></script>
 </body>
 </html>
